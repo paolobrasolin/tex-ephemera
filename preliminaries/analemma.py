@@ -39,23 +39,28 @@ import math
 sun = ephem.Sun()
 
 # Iterate over the date range and output ephemera
-for hour in range (11,14):
+for hour in range (0,24):
     X = []
     Y = []
     for day in closed_dates_interval(OBSERVER_BEG_DT, OBSERVER_END_DT):
-        # twelve_o_clock = day + datetime.timedelta(hours=hour)
-        # correction = datetime.timedelta(hours=(float(OBS.lon) * 12 / math.pi))
-        # corrected = (twelve_o_clock).astimezone(pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
-        twelve_o_clock = day + datetime.timedelta(hours=hour)
-        correction = datetime.timedelta(hours=(float(OBS.lon) * 12 / math.pi))
-        corrected = (twelve_o_clock).astimezone(pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
-        print(corrected)
-        OBS.date = corrected
+
+        # hour_o_clock = day + datetime.timedelta(hours=hour)
+        # corrected = (hour_o_clock - physical_timezone_delta).astimezone(pytz.utc)
+
+        physical_timezone_delta = datetime.timedelta(hours=(float(OBS.lon) * 12 / math.pi))
+        hour_o_clock = day.replace(tzinfo=None) \
+                       + datetime.timedelta(hours=hour) \
+                       - physical_timezone_delta
+        OBS.date = hour_o_clock.strftime("%Y-%m-%d %H:%M:%S")
 
         sun.compute(OBS)
         Y.append(sun.alt)
         X.append(sun.az)
 
-    plt.scatter(X,Y)
-    plt.scatter(X,Y)
+    plt.scatter(X,Y, label=hour_o_clock)
+
+plt.legend()
+plt.grid(True)
+
+
 plt.show()

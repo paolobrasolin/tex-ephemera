@@ -4,8 +4,8 @@ import ephem
 import timezonefinder
 
 # Set date range
-BEG_DATE = "2018-02-01"
-END_DATE = "2018-02-28"
+BEG_DATE = "2018-01-01"
+END_DATE = "2018-12-31"
 
 # Set hometown parameters
 OBSERVER_LATITUDE = +45.23154
