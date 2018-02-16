@@ -1,0 +1,46 @@
+\documentclass{standalone}
+
+\usepackage{pagecolor}
+\pagecolor{black}
+
+\input{eph}
+\usepackage{tikz}
+
+\usetikzlibrary{calc}
+
+\tikzset{
+  pics/ephemerino/.style args={#1,#2,#3}{code={
+    \node at (#2*5in,#3*5in) {x};
+  }}
+}
+
+%% \def\eph#1#2#3#4#5#6#7#8#9{
+%%   % #1 date
+%%   % #3 norm alt
+%%   % #5 norm az
+%%   % #7 norm sunrise
+%%   % #9 norm sunset
+%%   %% \pic at (#5*5in,#3*5in) {ephemerino={#1,#7,#9}};
+%%   %% \node at (#5*5in,#3*5in) {X};
+%%   \draw [blue, ultra thick] (#5*5in,#3*10in) -- +(-3em,0) -- +(+3em,0);
+%%   \draw [cyan, white](#5*5in,#3*10in) -- +(-2em+#7*2em,0) -- +(#9*2em,0);
+%% }
+
+\def\eph#1#2#3#4#5#6#7#8#9{
+  \draw [black!99, line width=.1pt] (0,#1*.12pt) -- +(   2em,0);
+  \draw [black!75, line width=.1pt] (0,#1*.12pt) -- +(#9*2em,0);
+  \draw [black!50, line width=.1pt] (0,#1*.12pt) -- +(#8*2em,0);
+  \draw [black!25, line width=.1pt] (0,#1*.12pt) -- +(#7*2em,0);
+  \draw [black!00, line width=.1pt] (0,#1*.12pt) -- +(#6*2em,0);
+  \draw [black!25, line width=.1pt] (0,#1*.12pt) -- +(#5*2em,0);
+  \draw [black!50, line width=.1pt] (0,#1*.12pt) -- +(#4*2em,0);
+  \draw [black!75, line width=.1pt] (0,#1*.12pt) -- +(#3*2em,0);
+  \draw [black!99, line width=.1pt] (0,#1*.12pt) -- +(#2*2em,0);
+  %% \fill [red] (#6*2em,#1*.1pt) circle (.05pt);
+}
+
+\begin{document}
+\begin{tikzpicture}
+  \EPH%
+\end{tikzpicture}
+\end{document}
