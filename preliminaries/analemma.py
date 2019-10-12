@@ -4,8 +4,8 @@ import ephem
 import timezonefinder
 
 # Set date range
-BEG_DATE = "2018-01-01"
-END_DATE = "2018-12-31"
+BEG_DATE = "2018-03-20"
+END_DATE = "2018-12-21"
 
 # Set hometown parameters
 OBSERVER_LATITUDE = +45.23154
@@ -39,7 +39,7 @@ import math
 sun = ephem.Sun()
 
 # Iterate over the date range and output ephemera
-for hour in range (0,24):
+for hour in range (12,13):
     X = []
     Y = []
     for day in closed_dates_interval(OBSERVER_BEG_DT, OBSERVER_END_DT):
